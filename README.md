@@ -10,8 +10,8 @@ Data is saved automatically and restored on next launch.
 1. Clone the repository:
 
 ```bash
-   git clone <your-repo-url>
-   cd <repo-folder>
+   git clone https://github.com/yana-shapka/goit-pycore-final
+   cd goit-pycore-final
 ```
 
 2. Install as a package:
