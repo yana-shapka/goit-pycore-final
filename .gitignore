@@ -172,3 +172,4 @@ cython_debug/
 # [jet_brains_custom]-[END]
 
 addressbook.pkl
+notebook.pkl
