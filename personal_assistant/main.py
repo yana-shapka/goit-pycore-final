@@ -38,12 +38,14 @@ def parse_input(user_input: str):
 def main():
     book = load_contacts()
     notebook = load_notes()
-    print("Welcome to Personal Assistant!")
-    print("Type 'help' to see all commands.")
+    print("=" * 40)
+    print("   🤖 Welcome to Personal Assistant!")
+    print("=" * 40)
+    print("Type 'help' to see all available commands.")
 
     try:
         while True:
-            user_input = input("Enter a command: ")
+            user_input = input("\n> ")
             command, args = parse_input(user_input)
 
             if not command:
@@ -51,11 +53,8 @@ def main():
 
             if command in ["close", "exit"]:
                 break
-
             elif command == "help":
                 print(show_help())
-
-            # --- CONTACTS ---
             elif command == "add-contact":
                 print(add_contact(args, book))
             elif command == "add-phone":
@@ -84,8 +83,6 @@ def main():
                 print(show_birthday(args, book))
             elif command == "birthdays":
                 print(birthdays(args, book))
-
-            # --- NOTES ---
             elif command == "add-note":
                 print(add_note(args, notebook))
             elif command == "all-notes":
@@ -96,16 +93,15 @@ def main():
                 print(edit_note(args, notebook))
             elif command == "delete-note":
                 print(delete_note(args, notebook))
-
             else:
-                print("Invalid command. Type 'help' to see all commands.")
+                print(f"❌ Unknown command '{command}'. Type 'help' to see all commands.")
 
     except KeyboardInterrupt:
-        print("\nInterrupted. Saving data...")
+        print("\n\n⚠️  Interrupted. Saving data...")
     finally:
         save_contacts(book)
         save_notes(notebook)
-        print("Data saved. Goodbye!")
+        print("💾 Data saved. Goodbye! 👋")
 
 
 if __name__ == "__main__":
