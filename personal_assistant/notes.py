@@ -1,4 +1,3 @@
-import pickle
 from collections import UserDict
 from datetime import datetime
 from typing import Optional
@@ -36,7 +35,7 @@ class NoteBook(UserDict):
 
     def delete(self, note_id: int):
         if note_id not in self.data:
-            raise KeyError(f"Note {note_id} not found.")
+            raise KeyError(f"Note with ID {note_id} not found.")
         del self.data[note_id]
 
     def search(self, query: str) -> list:
@@ -47,19 +46,3 @@ class NoteBook(UserDict):
         if not self.data:
             return "No notes saved."
         return "\n".join(str(note) for note in self.data.values())
-
-
-def save_notes(notebook: NoteBook, filename: str = "notebook.pkl"):
-    with open(filename, "wb") as f:
-        pickle.dump(notebook, f)
-
-
-def load_notes(filename: str = "notebook.pkl") -> NoteBook:
-    try:
-        with open(filename, "rb") as f:
-            notebook = pickle.load(f)
-            if notebook.data:
-                Note._counter = max(notebook.data.keys())
-            return notebook
-    except FileNotFoundError:
-        return NoteBook()

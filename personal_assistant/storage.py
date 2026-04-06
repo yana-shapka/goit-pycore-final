@@ -1,6 +1,6 @@
 import pickle
 from personal_assistant.models import AddressBook
-from personal_assistant.notes import NoteBook
+from personal_assistant.notes import NoteBook, Note
 
 
 def save_contacts(book: AddressBook, filename: str = "addressbook.pkl"):
@@ -24,6 +24,9 @@ def save_notes(notebook: NoteBook, filename: str = "notebook.pkl"):
 def load_notes(filename: str = "notebook.pkl") -> NoteBook:
     try:
         with open(filename, "rb") as f:
-            return pickle.load(f)
+            notebook = pickle.load(f)
+            if notebook.data:
+                Note._counter = max(notebook.data.keys())
+            return notebook
     except FileNotFoundError:
         return NoteBook()
